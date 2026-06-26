@@ -1,72 +1,111 @@
-# 🦜️🔗 LangChain 🤝 Streamlit agent examples
+🧠 AI-Powered Intelligent Data & Vision Analytics Platform
+A Unified Conversational System for Data Analysis, Machine Learning, and Computer Vision — built with Streamlit, LangChain, Groq, and OpenAI.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/langchain-ai/streamlit-agent?quickstart=1)
+📘 Project Description
+This project is a comprehensive AI platform that merges natural language processing, data analytics, machine learning, and computer vision — all accessible via a single Streamlit-based dashboard.
 
-This repository contains reference implementations of various LangChain agents as Streamlit apps including:
+Users can interact with their data, documents, SQL databases, and images through chat-based interfaces powered by LangChain, Groq, and OpenAI.
+It empowers professionals to conduct analytics, training, and visualization in one environment without switching tools.
 
-- `basic_streaming.py`: Simple streaming app with `langchain.chat_models.ChatOpenAI` ([View the app](https://langchain-streaming-example.streamlit.app/))
-- `basic_memory.py`: Simple app using `StreamlitChatMessageHistory` for LLM conversation memory ([View the app](https://langchain-st-memory.streamlit.app/))
-- `mrkl_demo.py`: An agent that replicates the [MRKL demo](https://python.langchain.com/docs/modules/agents/how_to/mrkl) ([View the app](https://langchain-mrkl.streamlit.app))
-- `minimal_agent.py`: A minimal agent with search (requires setting `OPENAI_API_KEY` env to run)
-- `search_and_chat.py`: A search-enabled chatbot that remembers chat history ([View the app](https://langchain-chat-search.streamlit.app/))
-- `simple_feedback.py`: A chat app that allows the user to add feedback on responses using [streamlit-feedback](https://github.com/trubrics/streamlit-feedback), and link to the traces in [LangSmith](https://docs.smith.langchain.com/) ([View the app](https://langsmith-simple-feedback.streamlit.app/))
-- `chat_with_documents.py`: Chatbot capable of answering queries by referring custom documents ([View the app](https://langchain-document-chat.streamlit.app/))
-- `chat_with_sql_db.py`: Chatbot which can communicate with your database ([View the app](https://langchain-chat-sql.streamlit.app/))
-- `chat_pandas_df.py`: Chatbot to ask questions about a pandas DF (Note: uses `PythonAstREPLTool` which is vulnerable to arbitrary code execution,
-  see [langchain #7700](https://github.com/langchain-ai/langchain/issues/7700))
+🚀 Key Features
+💬 Conversational Data Analysis – Query CSV, Excel, or SQL databases in natural language.
+📄 Document Intelligence (RAG) – Upload PDFs and ask context-aware questions using Groq LLMs.
+🤖 Machine Learning Suite – Train and evaluate Logistic Regression or Neural Network models, tracked via MLflow.
+📸 Computer Vision Pro Suite – Perform image enhancement, object detection (YOLOv5), OCR, and real-time face or camera detection.
+🧠 Conversational Memory – Retains chat history using LangChain memory integration.
+⚡ Unified Dashboard – All modules integrated into a single Streamlit application.
+🔑 Groq + OpenAI Support – Switch easily between local and API-based models.
+⚙️ Project Requirements
+Component	Required Version / Notes
+Python	3.10 or higher
+RAM	8 GB (16 GB recommended)
+Dependencies	Listed in requirements.txt
+Internet Connection	Required for API calls and model downloads
+Optional GPU	NVIDIA CUDA (for PyTorch / YOLOv5 acceleration)
+🗃️ Database Setup (SQL Chat Module)
+A sample database Chinook.db is included in the project directory.
+You may replace it with your own .db (SQLite) file.
+The SQL chat module automatically connects and converts natural queries to SQL statements.
+Example query:
+“Show the top 10 customers with the highest total purchases.”
 
-Apps feature LangChain 🤝 Streamlit integrations such as the
-[Callback integration](https://python.langchain.com/docs/modules/callbacks/integrations/streamlit) and
-[StreamlitChatMessageHistory](https://python.langchain.com/docs/integrations/memory/streamlit_chat_message_history).
+🔑 API Configuration
+This project supports Groq (for LLM-based analysis) and OpenAI (for conversational agents).
 
-## More great app examples
+API Provider	Use Case	Key Format
+Groq	Chat with Data / PDFs / SQL	gsk_...
+OpenAI	Conversational & general NLP	sk-...
+To get your API keys:
+Groq: https://console.groq.com → Create API Key
+OpenAI: https://platform.openai.com/account/api-keys → Create Secret Key
+You will be prompted to enter these keys in the Streamlit sidebar when running the app.
 
-Check out some other full examples of apps that utilize LangChain + Streamlit:
+🧠 Running the Project Locally
+1️⃣ Create and Activate Virtual Environment
+python -m venv new_venv
+# Windows
+new_venv\Scripts\activate
+# macOS/Linux
+source new_venv/bin/activate
+2️⃣ Install Required Dependencies
+pip install -r requirements.txt
+3️⃣ Run the Unified App
+streamlit run app.py
+Once launched, open your browser and navigate to:
 
-- [Auto-graph](https://auto-graph.streamlit.app/) - Build knowledge graphs from user-input text ([Source code](https://github.com/langchain-ai/langchain-benchmarks/blob/main/extraction/streamlit_app.py))
-- [Web Explorer](https://web-explorer.streamlit.app/) - Retrieve and summarize insights from the web ([Source code](https://github.com/langchain-ai/web-explorer))
-- [LangChain Teacher](https://lang-teacher.streamlit.app/) - Learn LangChain from an LLM tutor ([Source code](https://github.com/langchain-ai/langchain-teacher))
-- [Text Splitter Playground](https://langchain-text-splitter.streamlit.app/) - Play with various types of text splitting for RAG ([Source code](https://github.com/langchain-ai/text-split-explorer))
-- [Tweet Generator](https://elon-twitter-clone.streamlit.app/) - Fine tune GPT-3.5 on tweets ([Source code](https://github.com/langchain-ai/twitter-finetune))
+http://localhost:8501
+You’ll see a sidebar navigation panel with the following modules:
 
-## Setup
+Chat with SQL
+Chat with Pandas
+Chat with Documents
+Machine Learning
+Computer Vision
+Select any mode to start exploring its features.
 
-This project uses [Poetry](https://python-poetry.org/) for dependency management.
+🧪 (Optional) MLflow Experiment Tracking
+To monitor ML experiment metrics and parameters:
 
-```shell
-# Create Python environment
-$ poetry install
+mlflow ui
+Then open:
 
-# Install git pre-commit hooks
-$ poetry shell
-$ pre-commit install
-```
+http://localhost:5000
+You can visualize accuracy, loss curves, parameters, and model logs here.
 
-## Running
+🧰 Troubleshooting
+Issue	Possible Cause	Solution
+ModuleNotFoundError	Missing dependency	Run pip install -r requirements.txt
+groq.NotFoundError	Invalid API key	Regenerate key from Groq Console
+OpenAIAuthenticationError	Wrong or expired OpenAI key	Update your OpenAI key
+cv2.error	Invalid Gaussian Blur parameter	Use odd values like 3, 5, or 7
+StreamlitDuplicateElementId	Duplicate buttons	Upgrade Streamlit (pip install --upgrade streamlit)
+ValueError: y should be 1D	Wrong target column in ML	Select a categorical target column
+🧱 Project Structure
+streamlit_agent/
+│
+├── app.py                       # Unified Streamlit dashboard (main entry)
+├── chat_pandas_df.py             # Chat with CSV / Excel datasets
+├── chat_with_documents.py        # PDF Q&A using LangChain RAG
+├── chat_with_sql_db.py           # SQL database natural language chat
+├── machine_learning.py           # ML models (Logistic + Neural Network)
+├── computer_vision.py            # Vision suite (YOLOv5, OCR, etc.)
+├── Chinook.db                    # Sample SQLite database
+├── requirements.txt              # Dependencies list
+└── README.md                     # Documentation
+🧩 Technologies Used
+Streamlit – Interactive web app framework for data apps
+LangChain – LLM orchestration, RAG, and conversational memory
+Groq / OpenAI APIs – High-performance LLMs for text and document understanding
+Pandas / NumPy – Data analysis and feature manipulation
+Scikit-learn / PyTorch – Machine learning and neural networks
+OpenCV / EasyOCR / YOLOv5 – Image processing and object detection
+MLflow – Tracking ML experiments and model management
+🧾 Example Use Cases
+Business Analysts: Query structured or unstructured data conversationally.
+Researchers: Summarize and interpret academic PDFs.
+Data Scientists: Prototype and compare ML models with auto-logging.
+Developers: Implement intelligent data and vision pipelines interactively.
+🏁 Conclusion
+The AI-Powered Intelligent Data & Vision Analytics Platform integrates data querying, ML modeling, and vision processing into a single, intuitive interface.
+It allows users to analyze data, build models, and process images through conversational commands — bridging human insight with machine intelligence.
 
-```shell
-# Run mrkl_demo.py or another app the same way
-$ streamlit run streamlit_agent/mrkl_demo.py
-```
-
-# Running with Docker
-
-This project includes `Dockerfile` to run the app in Docker container. In order to optimise the Docker Image is optimised for size and building time with cache techniques.
-
-To generate Image with `DOCKER_BUILDKIT`, follow below command
-
-```DOCKER_BUILDKIT=1 docker build --target=runtime . -t langchain-streamlit-agent:latest```
-
-1. Run the docker container directly
-
-``docker run -d --name langchain-streamlit-agent -p 8051:8051 langchain-streamlit-agent:latest ``
-
-2. Run the docker container using docker-compose (Recommended)
-
-Edit the Command in `docker-compose` with target streamlit app
-
-``docker-compose up``
-
-## Contributing
-
-We plan to add more agent and chain examples over time and improve the existing ones - PRs welcome! 🚀
